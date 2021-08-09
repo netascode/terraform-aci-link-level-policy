@@ -14,35 +14,42 @@ terraform {
 module "main" {
   source = "../.."
 
-  name        = "ABC"
-  alias       = "ALIAS"
-  description = "DESCR"
+  name     = "100G"
+  speed    = "100G"
+  auto     = false
+  fec_mode = "disable-fec"
 }
 
-data "aci_rest" "fvTenant" {
-  dn = "uni/tn-ABC"
+data "aci_rest" "fabricHIfPol" {
+  dn = "uni/infra/hintfpol-${module.main.name}"
 
   depends_on = [module.main]
 }
 
-resource "test_assertions" "fvTenant" {
-  component = "fvTenant"
+resource "test_assertions" "fabricHIfPol" {
+  component = "fabricHIfPol"
 
   equal "name" {
     description = "name"
-    got         = data.aci_rest.fvTenant.content.name
-    want        = "ABC"
+    got         = data.aci_rest.fabricHIfPol.content.name
+    want        = module.main.name
   }
 
-  equal "nameAlias" {
-    description = "nameAlias"
-    got         = data.aci_rest.fvTenant.content.nameAlias
-    want        = "ALIAS"
+  equal "speed" {
+    description = "speed"
+    got         = data.aci_rest.fabricHIfPol.content.speed
+    want        = "100G"
   }
 
-  equal "descr" {
-    description = "descr"
-    got         = data.aci_rest.fvTenant.content.descr
-    want        = "DESCR"
+  equal "autoNeg" {
+    description = "autoNeg"
+    got         = data.aci_rest.fabricHIfPol.content.autoNeg
+    want        = "off"
+  }
+
+  equal "fecMode" {
+    description = "fecMode"
+    got         = data.aci_rest.fabricHIfPol.content.fecMode
+    want        = "disable-fec"
   }
 }

@@ -1,22 +1,23 @@
 <!-- BEGIN_TF_DOCS -->
-[![Tests](https://github.com/netascode/terraform-aci-scaffolding/actions/workflows/test.yml/badge.svg)](https://github.com/netascode/terraform-aci-scaffolding/actions/workflows/test.yml)
+[![Tests](https://github.com/netascode/terraform-aci-link-level-policy/actions/workflows/test.yml/badge.svg)](https://github.com/netascode/terraform-aci-link-level-policy/actions/workflows/test.yml)
 
-# Terraform ACI Scaffolding Module
+# Terraform ACI Link Level Policy Module
 
-Description
+Manages ACI Link Level Policy
 
 Location in GUI:
-`Tenants` » `XXX`
+`Fabric` » `Access Policies` » `Policies` » `Interface` » `Link level`
 
 ## Examples
 
 ```hcl
-module "aci_scaffolding" {
-  source = "netascode/scaffolding/aci"
+module "aci_link_level_policy" {
+  source = "netascode/link-level-policy/aci"
 
-  name        = "ABC"
-  alias       = "ABC-ALIAS"
-  description = "My Description"
+  name     = "100G"
+  speed    = "100G"
+  auto     = true
+  fec_mode = "disable-fec"
 }
 
 ```
@@ -38,20 +39,21 @@ module "aci_scaffolding" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_name"></a> [name](#input\_name) | Tenant name. | `string` | n/a | yes |
-| <a name="input_alias"></a> [alias](#input\_alias) | Tenant alias. | `string` | `""` | no |
-| <a name="input_description"></a> [description](#input\_description) | Tenant description. | `string` | `""` | no |
+| <a name="input_name"></a> [name](#input\_name) | Link level interface policy name. | `string` | n/a | yes |
+| <a name="input_speed"></a> [speed](#input\_speed) | Interface speed. Choices: `inherit`, `100M`, `1G`, `10G`, `25G`, `40G`, `100G`, `400G`. | `string` | `"inherit"` | no |
+| <a name="input_auto"></a> [auto](#input\_auto) | Auto negotiation. | `bool` | `true` | no |
+| <a name="input_fec_mode"></a> [fec\_mode](#input\_fec\_mode) | Forward error correction (FEC) mode. Choices: `inherit`, `cl91-rs-fec`, `cl74-fc-fec`, `ieee-rs-fec`, `cons16-rs-fec`, `disable-fec`. | `string` | `"inherit"` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_dn"></a> [dn](#output\_dn) | Distinguished name of `fvTenant` object. |
-| <a name="output_name"></a> [name](#output\_name) | Tenant name. |
+| <a name="output_dn"></a> [dn](#output\_dn) | Distinguished name of `fabricHIfPol` object. |
+| <a name="output_name"></a> [name](#output\_name) | Link level interface policy name. |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [aci_rest.fvTenant](https://registry.terraform.io/providers/netascode/aci/latest/docs/resources/rest) | resource |
+| [aci_rest.fabricHIfPol](https://registry.terraform.io/providers/netascode/aci/latest/docs/resources/rest) | resource |
 <!-- END_TF_DOCS -->

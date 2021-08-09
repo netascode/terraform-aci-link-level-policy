@@ -1,9 +1,10 @@
-resource "aci_rest" "fvTenant" {
-  dn         = "uni/tn-${var.name}"
-  class_name = "fvTenant"
+resource "aci_rest" "fabricHIfPol" {
+  dn         = "uni/infra/hintfpol-${var.name}"
+  class_name = "fabricHIfPol"
   content = {
-    name      = var.name
-    nameAlias = var.alias
-    descr     = var.description
+    name    = var.name
+    speed   = var.speed
+    autoNeg = var.auto == true ? "on" : "off"
+    fecMode = var.fec_mode
   }
 }
