@@ -6,7 +6,7 @@
 Manages ACI Link Level Policy
 
 Location in GUI:
-`Fabric` » `Access Policies` » `Policies` » `Interface` » `Link level`
+`Fabric` » `Access Policies` » `Policies` » `Interface` » `Link Level`
 
 ## Examples
 
