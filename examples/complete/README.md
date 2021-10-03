@@ -13,7 +13,8 @@ Note that this example will create resources. Resources can be destroyed with `t
 
 ```hcl
 module "aci_link_level_policy" {
-  source = "netascode/link-level-policy/aci"
+  source  = "netascode/link-level-policy/aci"
+  version = ">= 0.0.1"
 
   name     = "100G"
   speed    = "100G"
