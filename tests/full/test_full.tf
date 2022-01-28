@@ -5,8 +5,8 @@ terraform {
     }
 
     aci = {
-      source  = "netascode/aci"
-      version = ">=0.2.0"
+      source  = "CiscoDevNet/aci"
+      version = ">=2.0.0"
     }
   }
 }
@@ -20,7 +20,7 @@ module "main" {
   fec_mode = "disable-fec"
 }
 
-data "aci_rest" "fabricHIfPol" {
+data "aci_rest_managed" "fabricHIfPol" {
   dn = "uni/infra/hintfpol-${module.main.name}"
 
   depends_on = [module.main]
@@ -31,25 +31,25 @@ resource "test_assertions" "fabricHIfPol" {
 
   equal "name" {
     description = "name"
-    got         = data.aci_rest.fabricHIfPol.content.name
+    got         = data.aci_rest_managed.fabricHIfPol.content.name
     want        = module.main.name
   }
 
   equal "speed" {
     description = "speed"
-    got         = data.aci_rest.fabricHIfPol.content.speed
+    got         = data.aci_rest_managed.fabricHIfPol.content.speed
     want        = "100G"
   }
 
   equal "autoNeg" {
     description = "autoNeg"
-    got         = data.aci_rest.fabricHIfPol.content.autoNeg
+    got         = data.aci_rest_managed.fabricHIfPol.content.autoNeg
     want        = "off"
   }
 
   equal "fecMode" {
     description = "fecMode"
-    got         = data.aci_rest.fabricHIfPol.content.fecMode
+    got         = data.aci_rest_managed.fabricHIfPol.content.fecMode
     want        = "disable-fec"
   }
 }

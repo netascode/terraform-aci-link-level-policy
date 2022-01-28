@@ -5,8 +5,8 @@ terraform {
     }
 
     aci = {
-      source  = "netascode/aci"
-      version = ">=0.2.0"
+      source  = "CiscoDevNet/aci"
+      version = ">=2.0.0"
     }
   }
 }
@@ -17,7 +17,7 @@ module "main" {
   name = "LL1"
 }
 
-data "aci_rest" "fabricHIfPol" {
+data "aci_rest_managed" "fabricHIfPol" {
   dn = "uni/infra/hintfpol-${module.main.name}"
 
   depends_on = [module.main]
@@ -28,7 +28,7 @@ resource "test_assertions" "fabricHIfPol" {
 
   equal "name" {
     description = "name"
-    got         = data.aci_rest.fabricHIfPol.content.name
+    got         = data.aci_rest_managed.fabricHIfPol.content.name
     want        = module.main.name
   }
 }

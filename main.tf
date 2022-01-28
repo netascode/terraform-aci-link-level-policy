@@ -1,4 +1,4 @@
-resource "aci_rest" "fabricHIfPol" {
+resource "aci_rest_managed" "fabricHIfPol" {
   dn         = "uni/infra/hintfpol-${var.name}"
   class_name = "fabricHIfPol"
   content = {
