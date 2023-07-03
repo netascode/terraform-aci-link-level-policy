@@ -14,8 +14,8 @@ variable "speed" {
   default     = "inherit"
 
   validation {
-    condition     = contains(["inherit", "100M", "1G", "10G", "25G", "40G", "100G", "400G"], var.speed)
-    error_message = "Allowed values: `inherit`, `100M`, `1G`, `10G`, `25G`, `40G`, `100G` or `400G`."
+    condition     = contains(["inherit", "auto", "100M", "1G", "10G", "25G", "40G", "100G", "400G"], var.speed)
+    error_message = "Allowed values: `inherit`, `auto`, `100M`, `1G`, `10G`, `25G`, `40G`, `100G` or `400G`."
   }
 }
 
