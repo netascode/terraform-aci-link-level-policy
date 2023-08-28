@@ -1,3 +1,7 @@
+## 0.1.1 (unreleased)
+
+- Add `auto` to allowed values for `speed`
+
 ## 0.1.0
 
 - Migrate to devnet provider

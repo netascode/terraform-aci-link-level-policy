@@ -9,7 +9,7 @@ variable "name" {
 }
 
 variable "speed" {
-  description = "Interface speed. Choices: `inherit`, `100M`, `1G`, `10G`, `25G`, `40G`, `100G`, `400G`."
+  description = "Interface speed. Choices: `inherit`, `auto`, `100M`, `1G`, `10G`, `25G`, `40G`, `100G`, `400G`."
   type        = string
   default     = "inherit"
 
